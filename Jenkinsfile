@@ -29,23 +29,23 @@ pipeline {
         stage('image') {
             steps {
                 unstash 'binaries'
-                sh "docker build -t nicopaez/passwordapi-java:taller\${BUILD_ID} . --build-arg JAR_FILE=./target/passwordapi-1.5.2.jar"
+                sh "docker build -t martinsalias/passwordapi:taller\${BUILD_ID} . --build-arg JAR_FILE=./target/passwordapi-1.5.2.jar"
             }
         }
         stage('publish') {
             steps {
-                sh "docker push nicopaez/passwordapi-java:taller\${BUILD_ID}"
+                sh "docker push martinsalias/passwordapi:taller\${BUILD_ID}"
             }
         }
         stage('deploy') {
             steps {
-                sh "kubectl set image deployment/passnico passnico=nicopaez/passwordapi-java:taller\${BUILD_ID}"
+                sh "kubectl set image deployment/martins01 martins01=martinsalias/passwordapi:taller\${BUILD_ID}"
                 sh "sleep 60"
             }
         }
         stage('acceptance_test') {
             steps {
-                sh 'curl http://178.128.128.101/actuator/health'
+                sh 'curl http://134.209.140.188/actuator/health'
             }
         }        
     }
