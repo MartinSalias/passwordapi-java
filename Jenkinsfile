@@ -45,7 +45,7 @@ pipeline {
         }
         stage('acceptance_test') {
             steps {
-                sh 'curl http://134.209.140.188/actuator/health'
+                sh 'curl http://134.209.140.205/actuator/health'
             }
         }        
     }
